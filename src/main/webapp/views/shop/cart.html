@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/shop/layout :: head">
+</head>
+<body>
+<tbody th:replace="/shop/layout :: headBody"></tbody>
+
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>Fresh and Organic</p>
+                    <h1>Cart</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- cart -->
+<form action="/shop/update" method="post" th:list="${carts}">
+    <div class="cart-section mt-150 mb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="cart-table-wrap">
+                        <table class="cart-table">
+                            <thead class="cart-table-head">
+                            <tr class="table-head-row">
+                                <th class="product-remove"></th>
+                                <th class="product-image">Product Image</th>
+                                <th class="product-name">Name</th>
+                                <th class="product-price">Price</th>
+                                <th class="product-quantity">Quantity</th>
+                                <th class="product-total">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr class="table-body-row" th:each=" c :${carts}">
+
+                                <td class="product-remove"><a th:href="@{/shop/delete/{idP}(idP = ${c.product.id})}">
+                                    <p th:text="${c.getId()}"></p>
+                                    <i class="far fa-window-close"></i></a></td>
+                                <td class="product-image"><img th:src="${c.product.image}" alt=""></td>
+                                <td class="product-name" th:text="${c.product.name}">Strawberry</td>
+                                <td class="product-price" th:text="${c.product.price}">$85</td>
+                                <td class="product-quantity">
+                                    <input th:id="${c.product.id}" type="number" th:value="${c.quantity}" min="1" th:max="${c.product.quantity}"
+                                           th:onclick="'javascript:productQuantity(\'' + ${c.quantity} + '\', \''+ ${c.product.price} + '\', \''+ ${c.product.id} + '\', \''+ ${total} + '\', \''+ ${c.total} + '\');'">
+                                </td>
+                                <td th:id=" 'total' + ${c.product.id}" class="product-total" th:text="${c.total}">1</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="total-section">
+                        <table class="total-table">
+                            <thead class="total-table-head">
+                            <tr class="table-total-row">
+                                <th>Total</th>
+                                <th>Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="total-data">
+                                <td><strong>Subtotal: </strong></td>
+                                <td><p th:text="${total}" id="subTotal"></p></td>
+                            </tr>
+                            <tr class="total-data">
+                                <td><strong>tax: </strong></td>
+                                <td><p th:text="${total * 5/100}" id="taxCart"></p></td>
+                            </tr>
+                            <tr class="total-data">
+                                <td><strong>Total: </strong></td>
+                                <td><p th:text="${total + total*5/100}" id="totalCart"></p></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="cart-buttons">
+                            <button type="submit" class="boxed-btn">Update Cart</button>
+                            <a href="/shop/checkOut" class="boxed-btn black">Check Out</a>
+                        </div>
+                    </div>
+
+                    <div class="coupon-section">
+                        <h3>Apply Coupon</h3>
+                        <div class="coupon-form-wrap">
+                            <form action="index.html">
+                                <p><input type="text" placeholder="Coupon"></p>
+                                <p><input type="submit" value="Apply"></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- end cart -->
+
+<footer th:replace="/shop/layout :: footer"></footer>
+
+
+</body>
+</html>
+<script>
+
+
+    function productQuantity(quantity, productPrice ,idP, cartTotal,ptotal ) {
+        let quan = document.getElementById(idP).value;
+        let price = +productPrice ;
+        let total = quan * price;
+        let subTotal = +cartTotal + total - +ptotal;
+        let  taxCart =  subTotal*5/100;
+        let totalCart = subTotal + taxCart;
+        document.getElementById("total"+idP).innerHTML = total ;
+        document.getElementById("subTotal").innerHTML = subTotal ;
+        document.getElementById("taxCart").innerHTML = taxCart;
+        document.getElementById("totalCart").innerHTML = totalCart ;
+    }
+
+</script>

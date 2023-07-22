@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/shop/layout :: head">
+</head>
+<body>
+<tbody th:replace="/shop/layout :: headBody"></tbody>
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>Fresh and Organic</p>
+                    <h1>Create</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <form  method="post" th:object="${product}" enctype="multipart/form-data">
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>price</th>
+                <th>img</th>
+                <th>quantity</th>
+                <th>content</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input th:field="*{name}">
+                    <p style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p></td>
+                <td><input th:field="*{price}">
+                    <p style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p></td>
+                <td><input type="file" name="imgFile">
+                    <input th:field="*{image}" type="hidden">
+                    <p style="color: red" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></p></td>
+                </td>
+                <td><input th:field="*{quantity}">
+                    <p style="color: red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p></td>
+            <td> <input th:field="*{content}">
+                <p style="color: red" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p></td>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-success">ok</button>
+    </form>
+</div>
+
+
+<footer th:replace="/shop/layout :: footer"></footer>
+
+
+</body>
+</html>

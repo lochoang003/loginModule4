@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/shop/layout :: head">
+</head>
+<body>
+<tbody th:replace="/shop/layout :: headBody"></tbody>
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 text-center">
+        <div class="breadcrumb-text">
+          <p>Fresh and Organic</p>
+          <h1>Edit</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <form action="/admin/editUser" method="post" th:object="${user}" enctype="multipart/form-data">
+
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>name</th>
+        <th>price</th>
+        <th>img</th>
+        <th>Role</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><input th:field="*{username}">
+          <input th:field="*{id}" type="hidden">
+          <p style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p></td>
+        <td><input th:field="*{password}">
+          <p style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p></td>
+        <td><input type="file" name="imgFile">
+          <input th:field="*{avata}" type="hidden">
+          <p style="color: red" th:if="${#fields.hasErrors('avata')}" th:errors="*{avata}"></p></td>
+        </td>
+        <td>
+          <select name="idRole">
+            <option value="1">Admin</option>
+            <option value="2">User</option>
+          </select>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-success">ok</button>
+  </form>
+</div>
+
+
+<footer th:replace="/shop/layout :: footer"></footer>
+
+
+</body>
+</html>

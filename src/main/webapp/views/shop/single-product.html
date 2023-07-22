@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/shop/layout :: head">
+</head>
+<style>.rating {
+	unicode-bidi: bidi-override;
+	direction: rtl;
+	text-align: left;
+	display: inline-block;
+}
+
+.star {
+	display: inline-block;
+	font-size: 30px;
+	color: #ccc;
+	cursor: pointer;
+}
+
+.star:hover,
+.star:hover ~ .star {
+	color: #ffcc00;
+}
+
+.star.active,
+.star.active ~ .star {
+	color: #ffcc00;
+}</style>
+<body>
+<tbody th:replace="/shop/layout :: headBody"></tbody>
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>See more Details</p>
+						<h1>Single Product</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- single product -->
+	<div class="single-product mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="single-product-img">
+						<img th:src="${product.image}" th:alt="${product.name}">
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="single-product-content">
+						<h3 th:text="${product.name}">Green apples have polyphenols</h3>
+						<p class="single-product-pricing" th:text="${product.price}"><span>Per Kg</span> $50</p>
+						<p th:text="${product.content}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta sint dignissimos, rem commodi cum voluptatem quae reprehenderit repudiandae ea tempora incidunt ipsa, quisquam animi perferendis eos eum modi! Tempora, earum.</p>
+						<p th:text="${product.view}">view</p>
+						<div class="single-product-form">
+							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+						</div>
+						<h4>Share:</h4>
+						<ul class="product-share">
+							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href=""><i class="fab fa-twitter"></i></a></li>
+							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+						</ul>
+					</div>
+					<div class="rating">
+						<span class="star" data-rating="1">&#9733;</span>
+						<span class="star" data-rating="2">&#9733;</span>
+						<span class="star" data-rating="3">&#9733;</span>
+						<span class="star" data-rating="4">&#9733;</span>
+						<span class="star" data-rating="5">&#9733;</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end single product -->
+	<footer  th:replace="/shop/layout :: footer"></footer>
+
+
+</body>
+</html>
+<script>
+	var stars = document.querySelectorAll('.star');
+
+	stars.forEach(function(star) {
+		star.addEventListener('click', setRating);
+	});
+
+	function setRating(e) {
+		var rating = e.target.getAttribute('data-rating');
+		stars.forEach(function(star) {
+			if (star.getAttribute('data-rating') <= rating) {
+				star.classList.add('active');
+			} else {
+				star.classList.remove('active');
+			}
+		});
+	}
+</script>

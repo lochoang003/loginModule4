@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/shop/layout :: head">
+    <title>Shop</title>
+</head>
+<body>
+<tbody th:replace="/shop/layout :: headBody"></tbody>
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>Fresh and Organic</p>
+                    <h1>Shop</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- products -->
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+
+        <div class="row product-lists">
+            <div class="col-lg-6 col-md-12 text-center">
+                <div class="single-product-item">
+                    <div class="product-image">
+                        <a href="/admin/user"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7Q1BoVqFY66QTYfA7tcuQ6PeXy-MNXcdmsg&usqp=CAU" alt="User" width="250" height="200"></a>
+                    </div>
+                    <h3>CRUD Account</h3>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 text-center">
+                <div class="single-product-item">
+                    <div class="product-image">
+                        <a href="/admin/product"><img src="https://media.vov.vn/sites/default/files/styles/large/public/2020-10/nhung-loai-trai-cay-khong-nen-an-khi-giam-can-590.jpg" alt="User" width="250" height="200"></a>
+                    </div>
+                    <h3>CRUD Product</h3>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- end products -->
+<footer  th:replace="/shop/layout :: footer"></footer>
+
+</body>
+</html>
